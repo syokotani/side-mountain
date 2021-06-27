@@ -18,7 +18,12 @@ gm = GaussianMixture(3,n_init=10).fit(vectors)
 labels = gm.predict(vectors)
 
 cluster_to_words = defaultdict(list)
-print(cluster_to_words)
+for cluster_id, word in zip(labels, vocab):
+    cluster_to_words[cluster_id].append(word)
+
+for i in range(len(cluster_to_words.values())):
+    print(list(cluster_to_words.keys())[i], list(cluster_to_words.values())[i][:250])
+    print("----------------------------------")
 
 data = {'word': vocab, 'label': labels}
 word_df = pd.DataFrame(data)
